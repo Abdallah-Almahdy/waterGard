@@ -16,7 +16,7 @@ class SectorController extends Controller
 
     public function index($government_id, $area_id)
     {
-       
+
         return new SectorCollection(Sector::where('area_id', $area_id)->get());
     }
 
@@ -33,6 +33,7 @@ class SectorController extends Controller
     {
         Sector::validate($request);
         $sector = Sector::create($request->all());
+        
         return response()->json($sector, 201);
     }
 
