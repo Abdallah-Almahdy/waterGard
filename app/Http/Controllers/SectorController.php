@@ -33,7 +33,10 @@ class SectorController extends Controller
     {
         Sector::validate($request);
         $sector = Sector::create($request->all());
-        
+
+        $predictModel = new PredictController();
+        $predictModel->predict($request);
+
         return response()->json($sector, 201);
     }
 

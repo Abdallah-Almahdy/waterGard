@@ -33,7 +33,7 @@ class Sector extends Model
             'area' => 'required|numeric',
             'irrigation_type' => 'required',
             'area_id' => 'required|exists:areas,id',
-            'ph' => 'nullable|numeric'
+
         ]);
     }
 
