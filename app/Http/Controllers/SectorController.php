@@ -35,9 +35,10 @@ class SectorController extends Controller
         $sector = Sector::create($request->all());
 
         $predictModel = new PredictController();
-        $predictModel->predict($request);
-
-        return response()->json($sector, 201);
+        $prediction = $predictModel->predict($request, $sector->id);
+        return response()->json([
+            'prediction' => $prediction
+        ], 201);
     }
 
     public function update(Request $request, $id)

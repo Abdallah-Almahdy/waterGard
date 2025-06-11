@@ -21,16 +21,6 @@ class predict extends Model
     {
         return $this->belongsTo(Sector::class);
     }
-    public function validate(Request $request)
-    {
-        return $request->validate([
-            'predict' => 'required',
-            'temp' => 'required',
-            'humidity' => 'required',
-            'rain' => 'required',
-            'sector_id' => 'required|exists:sectors,id',
-        ]);
-    }
 
 
 
