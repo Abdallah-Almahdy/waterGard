@@ -22,13 +22,14 @@ class AreaController extends Controller
         return new AreaCollection($areas);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
+        
 
         $area = Area::validate($request);
         $area = Area::create([
-            'name' => $request['name'],
-            'region_id' => $request['id']
+            'name' => $request->name,
+            'region_id' => $id
         ]);
         return new AreaResource($area);
     }
