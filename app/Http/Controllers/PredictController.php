@@ -40,19 +40,22 @@ class PredictController extends Controller
 
         $data = $regions->map(function ($region) {
             return [
-                'region' => $region->name,
+
                 'areas' => $region->areas->map(function ($area) {
                     return [
                         'area' => $area->name,
                         'sectors' => $area->sectors->map(function ($sector) {
                             return [
-                                'sector' => $sector->name,
+                                'crop' => $sector->crop_name,
+                                'soil' => $sector->soil_type,
+                                'irrigation' => $sector->irrigation_type,
+                                'area' => $sector->area,
+                                'created_at' => $sector->created_at,
+
                                 'predictions' => $sector->predicts->map(function ($predict) {
                                     return [
                                         'predict' => $predict->predict,
                                         'temp' => $predict->temp,
-                                        'humidity' => $predict->humidity,
-                                        'rain' => $predict->rain,
                                     ];
                                 }),
                             ];
