@@ -42,7 +42,7 @@ class SectorController extends Controller
         ]);
 
         $predictModel = new PredictController();
-        $prediction = $predictModel->predict($request, $sector->id);
+        $prediction = $predictModel->predict($request, $sector);
         return response()->json([
             'prediction' => $prediction
         ], 201);
