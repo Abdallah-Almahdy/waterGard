@@ -24,7 +24,7 @@ class PredictController extends Controller
         // $prediction = $response->json()['prediction'];
         $predict = predict::create([
             'predict' => 0.54,
-            'temp' => 26.0,
+            'temp' => $request->input('temp', 26.0), // default value if not provided
             'humidity' => 60.0,
             'rain' => 12.5,
             'sector_id' => $sector_id,

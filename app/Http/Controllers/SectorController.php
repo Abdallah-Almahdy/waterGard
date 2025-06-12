@@ -32,7 +32,14 @@ class SectorController extends Controller
     public function store(Request $request)
     {
         Sector::validate($request);
-        $sector = Sector::create($request->all());
+        $sector = Sector::create([
+            'crop_name' => $request->crop_name,
+            'soil_type' => $request->soil_type,
+            'season' => 'clay',
+            'area' => $request->area,
+            'irrigation_type' => $request->irrigation_type,
+            'area_id' => $request->area_id,
+        ]);
 
         $predictModel = new PredictController();
         $prediction = $predictModel->predict($request, $sector->id);

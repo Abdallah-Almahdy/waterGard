@@ -33,7 +33,6 @@ class Sector extends Model
         return $request->validate([
             'crop_name' => 'required|string',
             'soil_type' => 'required|string',
-            'season' => 'required|string',
             'area' => 'required|numeric',
             'irrigation_type' => 'required',
             'area_id' => 'required|exists:areas,id',
