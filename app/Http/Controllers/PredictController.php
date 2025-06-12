@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\predict;
+use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 class PredictController extends Controller
@@ -31,10 +32,37 @@ class PredictController extends Controller
         return $predict;
     }
 
-    public function getPredictions(Request $request) {
+    public function getPredictions(Request $request)
+    {
+        $regions = Region::where('user_id', auth()->id())
+            ->with('areas.sectors.predicts') // eager load all nested relations
+            ->get();
 
+        $data = $regions->map(function ($region) {
+            return [
+                'region' => $region->name,
+                'areas' => $region->areas->map(function ($area) {
+                    return [
+                        'area' => $area->name,
+                        'sectors' => $area->sectors->map(function ($sector) {
+                            return [
+                                'sector' => $sector->name,
+                                'predictions' => $sector->predicts->map(function ($predict) {
+                                    return [
+                                        'predict' => $predict->predict,
+                                        'temp' => $predict->temp,
+                                        'humidity' => $predict->humidity,
+                                        'rain' => $predict->rain,
+                                    ];
+                                }),
+                            ];
+                        }),
+                    ];
+                }),
+            ];
+        });
 
-
+        return response()->json($data);
     }
 
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\registerController;
+use App\Http\Controllers\PredictController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SectorController;
 use Illuminate\Http\Request;
@@ -28,6 +29,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('government', RegionController::class);
     Route::apiResource('government/{government_id}/areas', AreaController::class);
     Route::apiResource('government/{government_id}/areas/{area_id}/sectors', SectorController::class);
+    Route::get('getPredictions',[PredictController::class, 'getPredictions']);
 });
 
 

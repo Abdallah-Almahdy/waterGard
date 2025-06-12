@@ -23,6 +23,10 @@ class Sector extends Model
     {
         return $this->belongsTo(Area::class,'area_id','id');
     }
+    public function predicts()
+    {
+        return $this->hasMany(predict::class);
+    }
 
     public static function validate(Request $request)
     {

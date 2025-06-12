@@ -16,6 +16,10 @@ class Area extends Model
     {
         return $this->belongsTo(Region::class);
     }
+    public function sectors()
+    {
+        return $this->hasMany(Sector::class, 'area_id', 'id');
+    }
 
     public static function validate(Request $request){
         return $request->validate([
