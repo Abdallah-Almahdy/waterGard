@@ -40,7 +40,7 @@ class PredictController extends Controller
 
         $data = $regions->map(function ($region) {
             return [
-
+                'region' => $region->name,
                 'areas' => $region->areas->map(function ($area) {
                     return [
                         'area' => $area->name,
